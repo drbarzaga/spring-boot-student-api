@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/student")
-public class StudentController {
+public class StudentController extends ResourceController<Student> {
 
     @Autowired
     private StudentService studentService;

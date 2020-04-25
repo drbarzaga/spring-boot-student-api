@@ -19,6 +19,9 @@ public class Student {
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
+    @Column(name= "phone", length = 10, nullable = true)
+    private String phone;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "course_student",
             joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
@@ -64,5 +67,13 @@ public class Student {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

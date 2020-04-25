@@ -1,6 +1,7 @@
 package com.ayaxsoft.studentapp.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "teachers")
@@ -14,6 +15,12 @@ public class Teacher {
 
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+
+    @Column(name = "phone", length = 10, nullable = true)
+    private String phone;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
 
     public int getId() {
         return id;
@@ -37,5 +44,21 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

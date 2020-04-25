@@ -19,6 +19,10 @@ public class Course {
     @Column(nullable = false)
     private int duration;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private Teacher teacher;
+
     @ManyToMany(mappedBy = "courses")
     private List<Student> students;
 
@@ -60,5 +64,13 @@ public class Course {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
