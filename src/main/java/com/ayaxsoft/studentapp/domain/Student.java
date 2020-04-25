@@ -1,6 +1,7 @@
 package com.ayaxsoft.studentapp.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
@@ -9,14 +10,21 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name="first_name", length = 50, nullable = false)
+    @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
 
-    @Column(name="last_name", length = 50, nullable = false)
+    @Column(name = "last_name", length = 50, nullable = false)
     private String lastName;
 
-    @Column(name="email", length = 50, nullable = false)
+    @Column(name = "email", length = 50, nullable = false)
     private String email;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auther_id", referencedColumnName = "id")
+    )
+    private List<Course> courses;
 
     public int getId() {
         return id;
@@ -48,5 +56,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
