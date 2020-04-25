@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("/student")
 public class StudentController extends ResourceController<Student> {
 
@@ -16,6 +17,7 @@ public class StudentController extends ResourceController<Student> {
     private StudentService studentService;
 
     @GetMapping
+    @Override
     public ResponseEntity<List<Student>> index() {
         List<Student> students = studentService.getAll();
         if (students.size() == 0)
@@ -24,11 +26,13 @@ public class StudentController extends ResourceController<Student> {
     }
 
     @PostMapping
+    @Override
     public ResponseEntity<Student> save(@RequestBody Student student) {
         return new ResponseEntity<Student>(studentService.save(student), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @Override
     public ResponseEntity<Student> details(@PathVariable(name = "id") int id) {
         Student student = studentService.getById(id);
         if (student != null)
@@ -37,11 +41,13 @@ public class StudentController extends ResourceController<Student> {
     }
 
     @PutMapping
+    @Override
     public ResponseEntity<Student> update(@RequestBody Student student) {
         return new ResponseEntity<Student>(studentService.update(student), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<String> delete(@PathVariable(name = "id") int id){
         studentService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

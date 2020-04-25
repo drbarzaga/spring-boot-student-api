@@ -5,21 +5,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 public abstract class ResourceController <T> {
 
-    @GetMapping
     abstract ResponseEntity<List<T>> index();
-
-    @PostMapping
-    abstract ResponseEntity<T> save(@RequestBody T entity);
-
-    @PutMapping
-    abstract ResponseEntity<T> update(@RequestBody T entity);
-
-    @GetMapping("/{id}")
-    abstract ResponseEntity<T> details(@PathVariable(name = "id") int id);
-
-    @DeleteMapping("/{id}")
-    abstract ResponseEntity<String> delete(@PathVariable(name = "id") int id);
+    abstract ResponseEntity<T> save(T entity);
+    abstract ResponseEntity<T> update(T entity);
+    abstract ResponseEntity<T> details(int id);
+    abstract ResponseEntity<String> delete(int id);
 }
